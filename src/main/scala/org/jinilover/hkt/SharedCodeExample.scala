@@ -10,7 +10,7 @@ object SharedCodeExample {
   //    zeroProblem: M[Int],
   //    unEvenProblem: M[Int],
   //    notAllLowerCaseProblem: M[LowerCaseEvenNumber]
-  //  )(implicit m: Monad[M]): M[LowerCaseEvenNumber] = {
+  //  )(implicit M: Monad[M]): M[LowerCaseEvenNumber] = {
   def compute[M[_]: Monad]( // `M` is type constructor satisfies the `Monad` constraint
     ma: M[Int]
   )(
