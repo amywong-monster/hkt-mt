@@ -1,6 +1,7 @@
 package org.jinilover.hkt
 
 import org.jinilover.hkt.Commons._
+import zio.IO
 
 object SharedCodeExample {
   import cats.Monad
@@ -35,7 +36,7 @@ object SharedCodeExample {
 }
 
 object SharedCodeExampleUsage {
-  // import implementation of Monad[Option] and Monad[Either[String, ]]
+  // import implicit instances of Monad[Option] and Monad[Either[String, ]]
   import cats.instances.all._
 
   def computeForEither(either: Either[String, Int]): Either[String, LowerCaseEvenNumber] =
@@ -59,4 +60,18 @@ object SharedCodeExampleUsage {
   computeForOption(Option(0))
   computeForOption(Option(30))
   computeForOption(Option(250))
+
+  // import implicit instances of Monad[IO[String, ]]
+  import zio.interop.catz._
+
+  def computeForZio(zio: IO[String, Int]): IO[String, LowerCaseEvenNumber] =
+    SharedCodeExample.compute(ma = zio)(
+      zeroProblem = IO.fail("Cannot be divided by zero"),
+      unEvenProblem = IO.fail("After dividing 1000, the quotient is not even number"),
+      notAllLowerCaseProblem = IO.fail("Quotient str is not all lower case")
+    )
+  computeForZio(IO.fail("Not an integer"))
+  computeForZio(IO.effectTotal(0))
+  computeForZio(IO.effectTotal(30))
+  computeForZio(IO.effectTotal(250))
 }
