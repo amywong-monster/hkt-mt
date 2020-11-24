@@ -1,9 +1,15 @@
 package org.jinilover.hkt
 
-//TODO explain
-import cats.implicits._
 
 object TraversableExample {
+  // import everything from cats including
+  // - `Traverse[M[_]]` containing `sequence`
+  // - implicit `Traverse[List]` instance
+  // - syntax sugar to call `sequence` on List
+  // - implicit `Monad[Option]` instance
+  // - implicit `Monad[Either[String, ]]` instance
+  import cats.implicits._
+
   // flip List[Option[Int]] to Option[List[Int]]
   List(Option(2), None).sequence
 //  val res1: Option[List[Int]] = None
