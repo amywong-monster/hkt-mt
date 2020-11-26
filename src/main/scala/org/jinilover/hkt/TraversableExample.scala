@@ -1,6 +1,5 @@
 package org.jinilover.hkt
 
-
 object TraversableExample {
   // import everything from cats including
   // - `Traverse[M[_]]` containing `sequence`

@@ -1,6 +1,6 @@
 package org.jinilover.hkt
 
-import org.jinilover.hkt.Commons._
+import org.jinilover.hkt.Commons.{ LowerCaseEvenNumber, convertToString }
 
 object EitherExample {
   def compute(intEither: Either[String, Int]): Either[String, LowerCaseEvenNumber] =
